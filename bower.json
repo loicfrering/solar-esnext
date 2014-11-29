@@ -1,0 +1,19 @@
+{
+  "name": "solar",
+  "version": "0.0.0",
+  "authors": [
+    "Loïc Frering <loic.frering@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "loader.js": "stefanpenner/loader.js#~2.1.1"
+  }
+}
