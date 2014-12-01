@@ -1,9 +1,14 @@
+import Clock from 'clock';
+
 class Space {
   constructor() {
     this.initScene();
     this.initCamera();
     this.initRenderer();
     this.initLight();
+
+    this.initClock();
+    this.initObjects();
   }
 
   initScene() {
@@ -11,7 +16,7 @@ class Space {
   }
 
   initCamera() {
-    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 1000);
+    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 2000);
     this.camera.position.z = 1000;
   }
 
@@ -22,16 +27,40 @@ class Space {
   }
 
   initLight() {
-    this.light = new THREE.PointLight(0xffffff, 2);
-    this.light.position.set(0, 0, 0);
-    this.scene.add(this.light);
+    this.ambientLight = new THREE.AmbientLight(0x222222);
+    this.ambientLight.position.set(0, 0, 0);
+    this.scene.add(this.ambientLight);
+
+    this.pointLight = new THREE.PointLight(0xffffff, 2);
+    this.pointLight.position.set(0, 0, 0);
+    this.scene.add(this.pointLight);
+  }
+
+  initClock() {
+    this.clock = new Clock(this.loop, this);
+  }
+
+  initObjects() {
+    this.objects = [];
   }
 
   add(object) {
     if (object.mesh instanceof THREE.Mesh) {
+      this.objects.push(object);
       return this.scene.add(object.mesh);
     }
     throw new Error('Invalid object added to space.');
+  }
+
+  loop(t) {
+    this.objects.forEach(function(object) {
+      object.move(t);
+    });
+    this.render();
+  }
+
+  start() {
+    this.clock.start();
   }
 
   render() {
