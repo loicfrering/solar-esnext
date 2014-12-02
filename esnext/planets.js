@@ -53,8 +53,10 @@ class Earth extends Planet {
   }
 
   move(t) {
-    this.mesh.position.x = 600*Math.cos(t/500);
-    this.mesh.position.z = 400*Math.sin(t/500);
+    t -= 1000;
+    this.mesh.position.x = 600*Math.cos(t/400);
+    this.mesh.position.z = 400*Math.sin(t/400);
+    this.mesh.rotation.y += 0.01;
   }
 }
 
