@@ -35,6 +35,8 @@ class Planet {
     this.buildMaterial();
     this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.mesh.position.set(...this.position);
+    //this.mesh.castShadow = true;
+    //this.mesh.receiveShadow = true;
   }
 
   move() {
