@@ -27,7 +27,7 @@ class Space {
   }
 
   initLight() {
-    this.ambientLight = new THREE.AmbientLight(0x222222);
+    this.ambientLight = new THREE.AmbientLight(0x888888);
     this.ambientLight.position.set(0, 0, 0);
     this.scene.add(this.ambientLight);
 

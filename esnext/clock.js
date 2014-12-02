@@ -1,8 +1,8 @@
 class Clock {
   constructor(callback, context) {
-    this.timer = 0;
+    this.timer    = 0;
     this.callback = callback;
-    this.context = context;
+    this.context  = context;
   }
 
   get isStarted() {
