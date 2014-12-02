@@ -16,7 +16,9 @@ class Space {
   }
 
   initCamera() {
-    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 2000);
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+    this.camera = new THREE.OrthographicCamera(width / - 2, width / 2, height / 2, height / - 2, 1, 2000);
     this.camera.position.z = 1000;
   }
 
