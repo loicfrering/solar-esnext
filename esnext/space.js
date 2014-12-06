@@ -9,6 +9,7 @@ class Space {
 
     this.initClock();
     this.initObjects();
+    this.initStarField();
   }
 
   initScene() {
@@ -47,6 +48,11 @@ class Space {
     this.objects = [];
   }
 
+  initStarField() {
+    var starField = new StarField();
+    this.add(starField);
+  }
+
   add(object) {
     if (object.mesh instanceof THREE.Mesh) {
       this.objects.push(object);
@@ -68,6 +74,32 @@ class Space {
 
   render() {
     this.renderer.render(this.scene, this.camera);
+  }
+}
+
+class StarField {
+  constructor() {
+    this.buildMesh();
+  }
+
+  buildGeometry() {
+    this.geometry = new THREE.SphereGeometry(1000, 32, 32);
+  }
+
+  buildMaterial() {
+    this.material = new THREE.MeshBasicMaterial({
+      side: THREE.BackSide,
+      map: THREE.ImageUtils.loadTexture('images/starfield.png')
+    });
+  }
+
+  buildMesh() {
+    this.buildGeometry();
+    this.buildMaterial();
+    this.mesh = new THREE.Mesh(this.geometry, this.material);
+  }
+
+  move() {
   }
 }
 
