@@ -43,6 +43,34 @@ class Planet {
   }
 }
 
+class Sun extends Planet {
+  constructor() {
+    this.buildMesh();
+  }
+
+  buildGeometry() {
+    this.geometry = new THREE.SphereGeometry(40, 32, 32);
+  }
+
+  buildMaterial() {
+    this.material = new THREE.MeshPhongMaterial({
+      color: 'yellow',
+      map: THREE.ImageUtils.loadTexture('images/sunmap.jpg'),
+      emissive: 0xdddddd
+    });
+  }
+
+  buildMesh() {
+    this.buildGeometry();
+    this.buildMaterial();
+    this.mesh = new THREE.Mesh(this.geometry, this.material);
+  }
+
+  move() {
+    this.mesh.rotation.y += 0.005;
+  }
+}
+
 class Earth extends Planet {
   constructor(position) {
     super(position, 100, {
@@ -75,4 +103,4 @@ class Moon extends Planet {
   }
 }
 
-export { Planet, Earth, Moon };
+export { Planet, Sun, Earth, Moon };

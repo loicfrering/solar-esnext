@@ -1,13 +1,10 @@
-import { Planet, Earth, Moon } from 'planets';
+import { Planet, Sun, Earth, Moon } from 'planets';
 import Space from 'space';
 
 var space = new Space();
 
-var geometry = new THREE.SphereGeometry(200, 32, 32);
-var material = new THREE.MeshBasicMaterial({ color: 'yellow' });
-var sun = new THREE.Mesh(geometry, material);
-sun.position.set(0, 0, 0);
-space.scene.add(sun);
+var sun = new Sun();
+space.add(sun);
 
 var earth = new Earth([1200, 0, 0]);
 space.add(earth);
