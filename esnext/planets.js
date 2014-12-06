@@ -62,7 +62,10 @@ class Earth extends Planet {
 
 class Moon extends Planet {
   constructor(earth) {
-    super([0, 0, 0], 10);
+    super([0, 0, 0], 20, {
+      map: 'images/moonmap1k.jpg',
+      bumpMap: 'images/moonbump1k.jpg'
+    });
     this.earth = earth;
   }
 
