@@ -92,7 +92,8 @@ class Earth extends Planet {
       0, 2*Math.PI,
       false
     );
-    var path = new THREE.Path(curve.getPoints(50));
+    var path = new THREE.CurvePath();
+    path.add(curve);
     var geometry = path.createPointsGeometry(50);
 
     var material = new THREE.LineBasicMaterial({ color: 0xffffff });
