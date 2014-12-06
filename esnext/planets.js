@@ -73,11 +73,32 @@ class Sun extends Planet {
 
 class Earth extends Planet {
   constructor(position) {
-    super(position, 100, {
+    this.position = position;
+    this.radius = 100;
+
+    super(this.position, this.radius, {
       map: 'images/earthmap1k.jpg',
       bumpMap: 'images/earthbump1k.jpg',
       specularMap: 'images/earthspec1k.jpg'
     });
+
+    this.buildOrbitMesh();
+  }
+
+  buildOrbitMesh() {
+    var curve = new THREE.EllipseCurve(
+      0, 0,
+      600, 400,
+      0, 2*Math.PI,
+      false
+    );
+    var path = new THREE.Path(curve.getPoints(50));
+    var geometry = path.createPointsGeometry(50);
+
+    var material = new THREE.LineBasicMaterial({ color: 0xffffff });
+
+    this.orbitMesh = new THREE.Line(geometry, material);
+    this.orbitMesh.rotation.x += Math.PI/2;
   }
 
   move(t) {
