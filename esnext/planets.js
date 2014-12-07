@@ -82,7 +82,22 @@ class Earth extends Planet {
       specularMap: 'images/earthspec1k.jpg'
     });
 
+    this.buildCloudMesh();
+    this.mesh.add(this.cloudMesh);
     this.buildOrbitMesh();
+  }
+
+  buildCloudMesh() {
+    var geometry = new THREE.SphereGeometry(this.radius + 2, 32, 32);
+    var material = new THREE.MeshPhongMaterial({
+      map: THREE.ImageUtils.loadTexture('images/earthcloudmap.jpg'),
+      alphaMap: THREE.ImageUtils.loadTexture('images/earthcloudmaptransinv.jpg'),
+      side: THREE.DoubleSide,
+      transparent: true,
+      opacity: 0.8
+    });
+
+    this.cloudMesh = new THREE.Mesh(geometry, material);
   }
 
   buildOrbitMesh() {
@@ -107,6 +122,7 @@ class Earth extends Planet {
     this.mesh.position.x = 600*Math.cos(t/400);
     this.mesh.position.z = 400*Math.sin(t/400);
     this.mesh.rotation.y += 0.01;
+    this.cloudMesh.rotation.y -= 0.002;
   }
 }
 
