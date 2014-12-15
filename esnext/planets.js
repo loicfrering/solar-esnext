@@ -136,7 +136,11 @@ class Moon extends Planet {
   }
 
   move(t) {
-    this.mesh.position.x = this.earth.mesh.position.x + 150*Math.cos(t/20);
+    //this.mesh.position.x = this.earth.mesh.position.x + 150*Math.cos(t/20);
+    //this.mesh.position.z = this.earth.mesh.position.z + 150*Math.sin(t/20);
+    var angle = Math.PI/12;
+    this.mesh.position.x = this.earth.mesh.position.x + 150*Math.cos(t/20)*Math.cos(angle);
+    this.mesh.position.y = -150*Math.cos(t/20)*Math.sin(angle);
     this.mesh.position.z = this.earth.mesh.position.z + 150*Math.sin(t/20);
   }
 }
