@@ -133,6 +133,39 @@ class Moon extends Planet {
       bumpMap: 'images/moonbump1k.jpg'
     });
     this.earth = earth;
+
+    this.buildOrbitMesh();
+  }
+
+  buildOrbitMesh() {
+    var MoonOrbitCurve = THREE.Curve.create(() => {}, (t) => {
+      var vector = new THREE.Vector2();
+      var angle = Math.PI/12;
+      vector.x = 150*Math.cos(t*10)*Math.cos(angle);
+      vector.y = -150*Math.cos(t*10)*Math.sin(angle);
+      vector.z = 150*Math.sin(t*10);
+      console.log(vector);
+      return vector;
+    });
+
+    var curve = new THREE.EllipseCurve(
+      0, 0,
+      150, 150,
+      0, 2*Math.PI,
+      false
+    );
+
+    //curve = new MoonOrbitCurve();
+
+    var path = new THREE.CurvePath();
+    path.add(curve);
+    var geometry = path.createPointsGeometry(50);
+
+    var material = new THREE.LineBasicMaterial({ color: 0xffffff });
+
+    this.orbitMesh = new THREE.Line(geometry, material);
+    this.orbitMesh.rotation.x += Math.PI/2;
+    this.orbitMesh.rotation.y -= Math.PI/12;
   }
 
   move(t) {
@@ -142,6 +175,8 @@ class Moon extends Planet {
     this.mesh.position.x = this.earth.mesh.position.x + 150*Math.cos(t/20)*Math.cos(angle);
     this.mesh.position.y = -150*Math.cos(t/20)*Math.sin(angle);
     this.mesh.position.z = this.earth.mesh.position.z + 150*Math.sin(t/20);
+
+    this.orbitMesh.position.copy(this.earth.mesh.position);
   }
 }
 

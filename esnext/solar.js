@@ -12,6 +12,7 @@ space.scene.add(earth.orbitMesh);
 
 var moon = new Moon(earth);
 space.add(moon);
+space.scene.add(moon.orbitMesh);
 
 //function render() {
 //  requestAnimationFrame(render);
