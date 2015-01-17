@@ -6,7 +6,7 @@ var space = new Space();
 var sun = new Sun();
 space.add(sun);
 
-var earth = new Earth([1200, 0, 0]);
+window.earth = new Earth([1200, 0, 0]);
 space.add(earth);
 space.scene.add(earth.orbitMesh);
 
